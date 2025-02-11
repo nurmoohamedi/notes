@@ -27,7 +27,7 @@ const NoteContainer = ({notes, addNote, deleteNote, updateNote, addTag, deleteTa
     return (
         <div className="notes">
 
-            {notes.map(note => <Note key={note.id} note={note} deleteNote={deleteNote} addTag={addTag} updateNote={updateNote} deleteTag={deleteTag}/>)}
+            {notes?.map(note => <Note key={note.id} note={note} deleteNote={deleteNote} addTag={addTag} updateNote={updateNote} deleteTag={deleteTag}/>)}
 
             <div className="note note_add">
                 <div className="note__text">

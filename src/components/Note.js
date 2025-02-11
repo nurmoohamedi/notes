@@ -4,6 +4,15 @@ import tag_icon from "./../assets/hash.png"
 import delete_icon from "./../assets/delete.png"
 import add_icon from "./../assets/add_icon.png"
 
+const Tag = ({tag, deleteTag, note}) => {
+    return (
+        <a className="tag">
+            {tag}
+            <span className="tag_delete" onClick={()=>deleteTag(note.id, tag)}>x</span>
+        </a>
+    )
+}
+
 const Note = ({note, deleteNote, updateNote, addTag, deleteTag}) => {
 
     const [tagValue, setTagValue] = useState("");
@@ -19,16 +28,6 @@ const Note = ({note, deleteNote, updateNote, addTag, deleteTag}) => {
         addTag(id, tagValue);
         setTagValue("")
         setTagMode(false);
-    }
-
-    const Tag = ({tag, deleteTag}) => {
-        debugger
-        return (
-            <a className="tag">
-                {tag}
-                <span className="tag_delete" onClick={()=>deleteTag(note.id, tag)}>x</span>
-            </a>
-        )
     }
 
     return (
@@ -52,7 +51,7 @@ const Note = ({note, deleteNote, updateNote, addTag, deleteTag}) => {
                             <div className="note__tag_tags">
                                 <div className="tags">
                                     {note.tags?.map(tag => {
-                                        return <Tag tag={tag} key={tag} deleteTag={deleteTag}/>
+                                        return <Tag tag={tag} key={tag} deleteTag={deleteTag} note={note} />
                                     })}
                                 </div>
                                 <div className="tag_switch" onClick={() => setTagMode(true)}>

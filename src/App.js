@@ -15,16 +15,20 @@ const notesList = [
         id: 2,
         text: "Damn I love Coding!",
         createdDate: "08-01-2022",
-        tags: ["#hackerMotherfucker", "#coding"]
+        tags: ["#coding"]
     }
-]
+];
 
 const App = () => {
 
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState(localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : notesList);
     const [searchValue, setSearchValue] = useState("");
     const [searchNotes, setSearchNotes] = useState([]);
 
+    useEffect(() => {
+        localStorage.setItem('notes', JSON.stringify(notes || []));
+    }, [notes])
+    
     const addNote = (note) => {
         setNotes([...notes, note])
     }
@@ -104,7 +108,7 @@ const App = () => {
                     searchValue={searchValue} setSearchValue={setSearchValue}
                 />
                 <NoteContainer
-                    notes={searchValue.length === 0 ? notes : searchNotes} addNote={addNote} deleteNote={deleteNote}
+                    notes={searchValue?.length === 0 ? notes : searchNotes} addNote={addNote} deleteNote={deleteNote}
                     updateNote={updateNote}
                     addTag={addTag} deleteTag={deleteTag}
                 />

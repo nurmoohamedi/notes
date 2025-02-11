@@ -144,6 +144,7 @@ $header_size: 48px;
   & .search__bar{
     width: 880px;
     //border: 2px dashed blue;
+    position: relative;
   }
   & input{
     width: 100%;
@@ -211,7 +212,18 @@ $header_size: 48px;
     border: 10px solid;
     border-color: transparent transparent #e1e1e1 transparent;
   }
+  &__clear {
+    position: absolute;
+    right: 12px;
+    top: 8px;
 
+    cursor: pointer;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 @keyframes fadeIn {
