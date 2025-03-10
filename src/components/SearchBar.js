@@ -10,7 +10,27 @@ class SearchBar extends Component {
     this.state = {
       isOpen: false,
     };
+    this.popupRef = React.createRef();
   }
+
+  componentDidMount() {
+    document.addEventListener("click", this.handleOutsideClick);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleOutsideClick);
+  }
+
+  handleOutsideClick = (event) => {
+    if (
+      this.state.isOpen &&
+      this.popupRef.current &&
+      !this.popupRef.current.contains(event.target) &&
+      event.target.alt !== "filter" // Исключаем клик по иконке фильтра
+    ) {
+      this.setState({ isOpen: false });
+    }
+  };
 
   handleTagSearch = (tag) => {
     this.props.setSearchValue(tag);
@@ -58,7 +78,7 @@ class SearchBar extends Component {
             <img src={filter_icon} alt="filter" onClick={this.togglePopup} />
           </div>
           {isOpen && (
-            <div className="search__filter_tags" id="filter_popup">
+            <div className="search__filter_tags" id="filter_popup" ref={this.popupRef}>
               {tags.length === 0 ? (
                 <p>You have no tags!</p>
               ) : (
