@@ -60,6 +60,13 @@ class SearchBar extends Component {
           <div className="header__title">Notes</div>
           <div className="header__darkMode">
             <DarkMode />
+            <button
+              className="btn"
+              id="logout_btn"
+              onClick={this.props.handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </header>
         <div className="search">
@@ -70,7 +77,7 @@ class SearchBar extends Component {
               value={searchValue}
               onChange={this.handleChange}
             />
-            <a className="search__clear" onClick={() => setSearchValue("")}> 
+            <a className="search__clear" onClick={() => setSearchValue("")}>
               <img src={trash_icon} alt="clear" />
             </a>
           </div>
@@ -78,7 +85,11 @@ class SearchBar extends Component {
             <img src={filter_icon} alt="filter" onClick={this.togglePopup} />
           </div>
           {isOpen && (
-            <div className="search__filter_tags" id="filter_popup" ref={this.popupRef}>
+            <div
+              className="search__filter_tags"
+              id="filter_popup"
+              ref={this.popupRef}
+            >
               {tags.length === 0 ? (
                 <p>You have no tags!</p>
               ) : (
